@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UPDATE PRODUCT</title>
+    <link rel="stylesheet" href="css/update-product.css" />
+  </head>
+  <body>
+    
+    <h1>UPDATE PRODUCT</h1>
+    <hr>
+    <div class="form-container">
+      <form action="/update-price">
+
+
+        <div class="form-group">
+          <label for="product-id">Product ID:</label>
+          <input type="text" id="product-id" name="productId" required />
+        </div>
+
+        <div class="form-group">
+          <label for="selling-price">Selling Price:</label>
+          <input
+            type="number"
+            id="selling-price"
+            name="sellingPrice"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <button type="submit">ENTER</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <button id="dashboard-toggle"></button>
+    <div id="dashboard">
+      <img src="images/ahua-logo.png" id="TS" alt="" />
+      <button id="dashbut1" onclick="window.location.href='super-admin.html';">
+        OVERVIEW
+      </button>
+      <button onclick="window.location.href='employees.html';">
+        EMPLOYEES
+      </button>
+      <button onclick="window.location.href='offers.html';">
+        OFFERS
+      </button>
+      <button onclick="window.location.href='sales.html';">
+        SALES
+      </button>
+      <button onclick="window.location.href='update-product.html';">
+        UPDATE PRODUCT
+      </button>
+      <button id="logout-button" onclick="window.location.href='login.html'">
+        LOGOUT
+      </button>
+    </div>
+
+    <script>
+      const openButton = document.getElementById("dashboard-toggle");
+      const dashboard = document.getElementById("dashboard");
+      var body = document.body;
+
+      openButton.addEventListener("click", () => {
+        dashboard.style.left = "0"; // Slide the dashboard in from the left
+      });
+
+      body.addEventListener("click", (event) => {
+        if (event.target === dashboard) {
+          dashboard.style.left = "-500px"; // Slide the dashboard back out
+        }
+      });
+    </script>
+
+  </body>
+</html>

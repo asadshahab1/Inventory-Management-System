@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>APPLY OFFERS</title>
+    <link rel="stylesheet" href="CSS/offers.css" />
+  </head>
+  <body>
+
+    <h1>APPLY OFFERS</h1>
+    <hr style="border: solid rgba(58, 117, 166,1) 2px;">
+    
+    <div class="form-container">
+      <form>
+        <div class="form-group">
+          <label for="stock-id">CATEGORY:</label>
+          <select name="category" id="category" required>
+            <option value="">--Choose Category--</option>
+            <% options.forEach(option => { %>
+              <option value="<%= option.label %>"><%= option.label %></option>
+            <% }); %>
+        </select>          
+        </div>
+
+        <div class="form-group">
+          <label for="dispercent">DISCOUNT PERCENTAGE:</label>
+          <input type="text" id="dispercent" name="dispercent" required />
+        </div>
+    
+        <div class="form-group1">
+          <div class="form-group">
+            <label for="expiry">Expiry:</label>
+            <input type="date" id="expiry" name="expiry" required />
+          </div>
+          <button type="submit">APPLY OFFER</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <button id="dashboard-toggle"></button>
+    <div id="dashboard">
+      <img src="images/ahua-logo.png" id="TS" alt="" />
+      <button id="dashbut1" onclick="window.location.href='super-admin.html';">
+        OVERVIEW
+      </button>
+      <button onclick="window.location.href='employees.html';">
+        EMPLOYEES
+      </button>
+      <button onclick="window.location.href='offers.html';">
+        OFFERS
+      </button>
+      <button onclick="window.location.href='sales.html';">
+        SALES
+      </button>
+      <button onclick="window.location.href='update-product.html';">
+        UPDATE PRODUCT
+      </button>
+      <button id="logout-button" onclick="window.location.href='login.html'">
+        LOGOUT
+      </button>
+    </div>
+
+    <script>
+      const openButton = document.getElementById("dashboard-toggle");
+      const dashboard = document.getElementById("dashboard");
+      var body = document.body;
+
+      openButton.addEventListener("click", () => {
+        dashboard.style.left = "0"; // Slide the dashboard in from the left
+      });
+
+      body.addEventListener("click", (event) => {
+        if (event.target === dashboard) {
+          dashboard.style.left = "-500px"; // Slide the dashboard back out
+        }
+      });
+    </script>
+  </body>
+</html>

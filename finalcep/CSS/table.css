@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Victor+Mono&display=swap');
+
+body {
+  background-color: rgb(255, 255, 255);
+  }
+
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-family: helvetica;
+    font-size: 50px;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 10px 0;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    text-align: center;
+    font-family: 'Victor Mono', monospace;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    padding: 16px;
+    background-color: #43424275;
+    font-size: larger;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  td {
+    padding: 8px;
+    background-color: #8d8a8a67;
+  }

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employees</title>
+    <link rel="stylesheet" href="CSS/employees.css" />
+  </head>
+  <body>
+    <div class="main_main">
+      <h1 class="heading1">EMPLOYEES:</h1>
+    </div>
+    <div class="tabs" style="display: flex; justify-content: flex-end; padding-right: 3%;">
+      <input type="radio" id="radio-1" name="tabs" value="quality_assurance" <%= selectedTab === 'quality_assurance' ? 'checked' : '' %>>
+      <label class="tab" for="radio-1">QUALITY ASSURANCE</label>
+      <input type="radio" id="radio-2" name="tabs" value="stock_manager" <%= selectedTab === 'stock_manager' ? 'checked' : '' %>>
+      <label class="tab" for="radio-2">STOCK MANAGER</label>
+      <input type="radio" id="radio-3" name="tabs" value="cashier" <%= selectedTab === 'cashier' ? 'checked' : '' %>>
+      <label class="tab" for="radio-3">CASHIER</label>
+      <span class="glider"></span>
+    </div>
+    <hr style="border: solid black 1px;">
+    <div class="main">
+      <div class="container" id="tables">
+        <table>
+          <thead>
+            <tr>
+              <th>EMPLOYEE ID</th>
+              <th>EMPLOYEE NAME</th>
+              <th>ADDRESS</th>
+              <th>USERNAME</th>
+              <th>PASSWORD</th>
+              <th>SALARY</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <% employees.forEach(employee => { %>
+              <tr>
+                <td><%- employee.employee_id %></td>
+                <td><%- employee.employee_name %></td>
+                <td><%- employee.address %></td>
+                <td><%- employee.username %></td>
+                <td><%- employee.password %></td>
+                <td><%- employee.salary %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="form-container">
+      <button class="but" id="addemp" onclick="addemp()">
+          <h3>ADD EMPLOYEE</h3>
+      </button>
+      <button class="but" id="upemp" onclick="upemp()">
+          <h3>UPDATE EMPLOYEE</h3>
+      </button>
+  </div>
+
+  <div id="formContainer" class="addemp">
+    <form action="/addemployee" method="POST">
+        <h1>ADD EMPLOYEE</h1>
+        <input type="hidden" name="selectedTab" value="<%= selectedTab %>">
+        <div class="coolinput">
+          <label for="empid" class="text">EMPLOYEE ID</label>
+          <input type="text" placeholder="ID" name="EMPLOYEE ID" class="input">
+        </div>
+        <div class="coolinput">
+          <label for="empid" class="text">EMPLOYEE NAME</label>
+          <input type="text" placeholder="Name" name="EMPLOYEE NAME" class="input">
+        </div>
+        <div class="coolinput">
+          <label for="empid" class="text">ADDRESS</label>
+          <input type="text" placeholder="Address" name="ADDRESS" class="input">
+        </div>
+        <div class="coolinput">
+          <label for="empid" class="text">USERNAME</label>
+          <input type="text" placeholder="Username" name="USERNAME" class="input">
+        </div>
+        <div class="coolinput">
+          <label for="empid" class="text">PASSWORD</label>
+          <input type="text" placeholder="Password" name="PASSWORD" class="input">
+        </div>
+        <div class="coolinput">
+          <label for="empid" class="text">SALARY</label>
+          <input type="text" placeholder="Salary" name="SALARY" class="input">
+        </div>
+        <button type="submit" class="but1">ENTER</button>
+      </form>
+    </div>
+
+    <div id="updateFormContainer" class="upemp">
+
+      <form action="/updateemployee" method="POST">
+        <h1>UPDATE EMPLOYEE</h1>
+        <input type="hidden" name="selectedTab" value="<%= selectedTab %>">
+        <div class="coolinput">
+          <label for="empid" class="text">EMPLOYEE ID</label>
+          <input type="text" placeholder="ID" name="EMPLOYEE ID" class="input">
+        </div>
+        <input type="hidden" name="selectedTab" value="<%= selectedTab %>">
+        <div class="coolinput">
+          <label for="empid" class="text">SALARY</label>
+          <input type="text" placeholder="Salary" name="SALARY" class="input">
+        </div>
+        <button type="submit" class="but1">ENTER</button>
+      </form>
+    </div>
+
+    <script>
+      function addemp() {
+          const btn = document.getElementById('addemp');
+          const btn2 = document.getElementById('upemp');
+          const table = document.getElementById('tables');
+          const formContainer = document.getElementById('formContainer');
+          const updateFormContainer = document.getElementById('updateFormContainer');
+      
+          btn.style.display = 'none';
+          btn2.style.display = 'none';
+          table.style.display = 'none';
+      
+          formContainer.style.display = 'block';
+          updateFormContainer.style.display = 'none';
+        }
+      
+        function upemp() {
+          const btn = document.getElementById('addemp');
+          const btn2 = document.getElementById('upemp');
+          const table = document.getElementById('tables');
+          const formContainer = document.getElementById('formContainer');
+          const updateFormContainer = document.getElementById('updateFormContainer');
+      
+          btn.style.display = 'none';
+          btn2.style.display = 'none';
+          table.style.display = 'none';
+      
+          formContainer.style.display = 'none';
+          updateFormContainer.style.display = 'block';
+        }
+      const radioButtons = document.querySelectorAll('input[name="tabs"]');
+      const employeeTableBody = document.getElementById('employeeTableBody');
+
+      radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', () => {
+          const selectedTabValue = document.querySelector('input[name="tabs"]:checked').value;
+          fetch(`/employees/${selectedTabValue}`)
+            .then(response => response.json())
+            .then(data => {
+              const employees = data;
+              let tableRows = '';
+              employees.forEach(employee => {
+                tableRows += `
+                  <tr>
+                    <td>${employee.employee_id}</td>
+                    <td>${employee.employee_name}</td>
+                    <td>${employee.address}</td>
+                    <td>${employee.username}</td>
+                    <td>${employee.password}</td>
+                    <td>${employee.salary}</td>
+                  </tr>
+                `;
+              });
+              employeeTableBody.innerHTML = tableRows;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        });
+      });
+    </script>
+  </body>
+</html>

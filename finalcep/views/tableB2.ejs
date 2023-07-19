@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BRANCH 002</title>
+
+  <link rel="stylesheet" type="text/css" href="css/table.css">
+</head>
+<body>
+  <div class="container">
+    <h1 style="font-family: 'Montserrat', sans-serif;">DATA FOR BRANCH 002</h1>
+    <hr>
+    <hr>
+    <table>
+      <tr>
+        <th>PRODUCT ID</th>
+        <th>UNITS REMAINING</th>
+      </tr>
+      <% data.forEach((item) => { %>
+        <tr>
+        
+          <td><%= item.Product_id %></td>
+          <td><%= item.Units %></td>
+        </tr>
+        <% }) %>
+    </table>
+  </div>
+</body>
+</html>

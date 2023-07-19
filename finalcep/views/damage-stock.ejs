@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DAMGED PRODUCTS</title>
+    <link rel="stylesheet" type="text/css" href="css/damage-product.css" />
+  </head>
+  <body>
+    
+    <button id="dashboard-toggle"></button>
+        <div id="dashboard">
+            <img src="images/ahua-logo.png" id="TS" alt="">
+            <button id="dashbut1" onclick="window.location.href='main.html';">VIEW STOCK</button>
+            <button onclick="window.location.href='add-stock.html';">ADD STOCK</button>
+            <button onclick="window.location.href='remove-stock.html';">REMOVE STOCK</button>
+            <button onclick="window.location.href='damage-stock.html';">DAMAGED STOCK</button>
+            <button id="logout-button" onclick="window.location.href='login.html'">LOGOUT</button>
+        </div>
+
+        <script>
+            const openButton = document.getElementById('dashboard-toggle');
+            const dashboard = document.getElementById('dashboard');
+            var body = document.body
+    
+    openButton.addEventListener('click', () => {
+      dashboard.style.left = '0'; // Slide the dashboard in from the left
+    });
+    
+    body.addEventListener('click', (event) => {
+      if (event.target === dashboard) {
+        dashboard.style.left = '-500px'; // Slide the dashboard back out
+    }
+    });
+    
+        </script>
+
+
+      <div class="container">
+        <h1 style="font-family: 'Montserrat', sans-serif;">DAMAGED PRODUCTS</h1>
+        <hr />
+        <hr />
+        <table>
+          <tr>
+            <th>STOCK ID</th>
+            <th>NTN</th>
+            <th>PRODUCT ID</th>
+            <th>SUPPLIED DATE</th>
+            <th>DAMAGED UNITS</th>
+            <th>BRANCH</th>
+          </tr>
+
+          <% data.forEach((item) => { %>
+          <tr>
+            <td><%= item.Stock_id %></td>
+            <td><%= item.NTN %></td>
+            <td><%= item.Product_id %></td>
+            <td><%= item.Supplied_date %></td>
+            <td><%= item.units_damaged %></td>
+            <td><%= item.Location</td>
+          </tr>
+       <% }) %>
+          
+        </table>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>REMOVE STOCK</title>
+    <link rel="stylesheet" href="css/remove-stock.css" />
+  </head>
+  <body>
+    
+    <button id="dashboard-toggle"></button>
+        <div id="dashboard">
+            <img src="images/ahua-logo.png" id="TS" alt="">
+            <button id="dashbut1" onclick="window.location.href='main.html';">VIEW STOCK</button>
+            <button onclick="window.location.href='add-stock.html';">ADD STOCK</button>
+            <button onclick="window.location.href='remove-stock.html';">REMOVE STOCK</button>
+            <button onclick="window.location.href='damage-stock.html';">DAMAGED STOCK</button>
+            <button id="logout-button" onclick="window.location.href='login.html'">LOGOUT</button>
+        </div>
+
+        <script>
+            const openButton = document.getElementById('dashboard-toggle');
+            const dashboard = document.getElementById('dashboard');
+            var body = document.body
+    
+    openButton.addEventListener('click', () => {
+      dashboard.style.left = '0'; // Slide the dashboard in from the left
+    });
+    
+    body.addEventListener('click', (event) => {
+      if (event.target === dashboard) {
+        dashboard.style.left = '-500px'; // Slide the dashboard back out
+    }
+    });
+    
+        </script>
+
+
+    <h1>REMOVE PRODUCT/STOCK</h1>
+    <hr>
+    <form>
+    <div class="select-option">
+    <p>SELECT BRANCH: *
+      <select name="BRANCH_NAME" id="bname" required>
+          <option value="">--Select the branch--</option>
+          <option value="khi">KARACHI</option>
+          <option value="lhr">LAHORE</option>
+          <option value="isb">ISLAMABAD</option>
+      </select>
+    </p>
+    </div>
+  <div class="form-container">
+    
+      
+      <div class="form-group">
+        <label for="product-id">Product ID:</label>
+        <input type="text" id="product-id" name="productId" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="units-to-remove">Units to be Removed:</label>
+        <input type="number" id="units-to-remove" name="unitsToRemove" required>
+      </div>
+      
+      
+      <div class="form-group">
+        <button type="submit">Remove</button>
+        <button type="button" class="cancel">Cancel</button>
+      </div>
+  </div>
+  </form>
+</body>
+</html>

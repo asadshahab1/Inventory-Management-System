@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin</title>
+    <link rel="stylesheet" href="CSS/super-admin.css" />
+  </head>
+  <body>
+
+    <h1 class="heading">OVERVIEW:</h1>
+    <hr>
+    <div class="row butdiv">
+      <div class="but1" onclick="window.location.href='/employees';">
+        <img src="images/user.png" alt="" id="but1img">
+        <h1 class="buttext">EMPLOYEES</h1>
+      </div>
+
+      <div class="but2" onclick="window.location.href='offers.html';">
+        <img src="images/discount.png" alt="" id="but2img">
+        <h1  class="buttext1">OFFERS</h1>
+      </div>
+
+      <div class="but3" onclick="window.location.href='sales.html';">
+        <img src="images/sales.png" alt="" id="but3img">
+        <h1  class="buttext3">SALES</h1>
+      </div>
+    </div>
+
+    <button id="dashboard-toggle"></button>
+    <div id="dashboard">
+      <img src="images/ahua-logo.png" id="TS" alt="" />
+      <button id="dashbut1" onclick="window.location.href='super-admin.html';">
+        OVERVIEW
+      </button>
+      <button onclick="window.location.href='employees.html';">
+        EMPLOYEES
+      </button>
+      <button onclick="window.location.href='offers.html';">
+        OFFERS
+      </button>
+      <button onclick="window.location.href='sales.html';">
+        SALES
+      </button>
+      <button onclick="window.location.href='update-product.html';">
+        UPDATE PRODUCT
+      </button>
+      <button id="logout-button" onclick="window.location.href='login.html'">
+        LOGOUT
+      </button>
+    </div>
+
+    <script>
+      const openButton = document.getElementById("dashboard-toggle");
+      const dashboard = document.getElementById("dashboard");
+      var body = document.body;
+
+      openButton.addEventListener("click", () => {
+        dashboard.style.left = "0"; // Slide the dashboard in from the left
+      });
+
+      body.addEventListener("click", (event) => {
+        if (event.target === dashboard) {
+          dashboard.style.left = "-500px"; // Slide the dashboard back out
+        }
+      });
+    </script>
+  </body>
+</html>

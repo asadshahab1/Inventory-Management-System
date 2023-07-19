@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product Stock Table</title>
+    <link rel="stylesheet" href="css/QA.css" />
+  </head>
+  <body>
+    <button class="button-logout" onclick="window.location.href='login.html'">
+      LOGOUT
+    </button>
+    <h1 class="heading1">QUALITY ASSURANCE:</h1>
+    <hr />
+    <hr />
+    <table>
+      <thead>
+        <tr>
+          <th>PRODUCT ID</th>
+          <th>STOCK ID</th>
+          <th>EXPIRY DATE</th>
+          <th>SUPPLIED UNITS</th>
+          <th>PROCEED</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach((item) => { %>
+          <tr>
+            <td><%= item.Product_id %></td>
+            <td><%= item.Stock_id %></td>
+            <td><%= item.Expiry %></td>
+            <td><%= item.Supplied_units %></td>
+          <td class="proceed-buttons">
+            <button class="button-tick" onclick="proceed('tick', this)">
+              SUBMIT
+            </button>
+            <div class="damaged-input">
+              <button class="button-damaged">DAMAGED</button>
+              <div class="damaged-dropdown">
+                <input
+                  type="number"
+                  id="damagedUnits"
+                  placeholder="Enter units"
+                  min="1"
+                  onkeypress="submitDamaged(event)"
+                />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+
+    <script>
+      function proceed(action, button) {
+        if (action === "tick") {
+          // Hide the row when "Tick" button is clicked
+          const row = button.parentElement.parentElement;
+          const damagedUnits = document.getElementById("damagedUnits").value;
+          const stockId = button.parentElement.parentElement.querySelector("td:nth-child(2)").textContent;
+
+          const data = {
+         damagedUnits: damagedUnits,
+          stockId: stockId
+          };
+
+           fetch('/submit-qa', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      // Handle the response from the backend
+      if (response.ok) {
+        console.log('Damaged units submitted successfully');
+      } else {
+        console.error('Failed to submit damaged units');
+      }
+    })
+    .catch(error => {
+      console.error('Error occurred while submitting damaged units:', error);
+    });
+          row.style.display = "none";
+        }
+      }
+
+      function submitDamaged(event) {
+        if (event.key === "Enter") {
+          // Handle submit damaged action here
+          
+          document.querySelector(".damaged-dropdown").style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

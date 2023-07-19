@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Victor+Mono&display=swap');
+
+
+html, body {
+    height: 100%;
+    background-color: #dfdfdf;
+}
+
+.heading1 {
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    margin-left: 70px;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-47%, -42%);
+    scroll-behavior: smooth;
+    overflow: auto;
+    max-width: 900px;
+    max-height: 400px;
+}
+
+table {
+    width: 850px;
+    border-collapse: collapse;
+    overflow-y: scroll;
+    height: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+th,
+td {
+    padding: 15px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+th {
+    text-align: center;
+}
+
+thead th {
+    background-color: rgba(58, 117, 166,1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+} */
+
+tbody td {
+    position: relative;
+    font-family: 'Victor Mono', monospace;
+    background-color: #8d8a8a67;
+}
+
+tr {
+    height: 50px;
+}
+
+tbody tr:hover {
+    background-color: rgba(58, 117, 166,1);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.form-container {
+    position: relative;
+    top: 70px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 6px;
+    left: 65%;
+}
+
+.but {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    width: 80%;
+    height: 65px;
+    padding: 0px;
+    margin-bottom: 15px;
+    background-color: rgba(58, 117, 166,1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.but:hover {
+    background-color: #498fff;
+    transform: scale(1.05);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 20px;
+    width: 700px;
+  }
+
+  .coolinput {
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+
+.coolinput label.text {
+    font-size: 0.75rem;
+    color: #818CF8;
+    font-weight: 700;
+    position: relative;
+    top: 0rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    background: transparent;
+    width: fit-content;
+}
+
+.coolinput input[type=text].input {
+    padding: 11px 10px;
+    font-size: 0.75rem;
+    border: 2px #818CF8 solid;
+    border-radius: 5px;
+    background: transparent;
+    height: 20px;
+}
+
+.coolinput input[type=text].input:focus {
+    outline: none;
+}
+
+.hidden {
+    display: none;
+  }
+
+  .but1 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    width: 80%;
+    height: 65px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    background-color: rgba(58, 117, 166,1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.addemp {
+    display: none;
+  }
+
+.upemp {
+    display: none;
+}

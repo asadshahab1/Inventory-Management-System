@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cashier</title>
+  <link rel="stylesheet" href="CSS/cashier.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="main_main">
+    <div>
+      <h5>CASHIER NAME, <%= name %>!</h5>
+      <h5>CASHIER ID,<%= cashier_id %></h5>
+    </div>
+    <h1 class="heading1">CASHIER:</h1>
+    <button><span>LOGOUT</span></button>
+  </div>
+  <div class="order_Data"></div>
+  <div class="main">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Retail Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-container">
+      <div class="coolinput">
+        <label for="product-id" class="text">Product ID:</label>
+        <input
+          type="text"
+          placeholder="Write here..."
+          name="product-id"
+          class="input"
+        />
+      </div>
+      <div class="coolinput">
+        <label for="quantity" class="text">Quantity:</label>
+        <input
+          type="text"
+          placeholder="Write here..."
+          name="quantity"
+          class="input"
+        />
+      </div>
+      <button onclick="addToOrder()" class="addtoorderbut">
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"
+            ></path>
+          </svg>
+          Add to Order
+        </span>
+      </button>
+      <button onclick="removeFromOrder()">
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"
+            ></path>
+          </svg>
+          Remove from Order
+        </span>
+      </button>
+      <button onclick="placeOrder()">
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"
+            ></path>
+          </svg>
+           place order
+        </span>
+      </button>
+      <!-- Your existing code for the "Remove from Order" and "Place Order" buttons -->
+    </div>
+  </div>
+
+  <script>
+    // The products list received from the server (Replace this with the actual data sent from the server)
+    const productsList = JSON.parse('<%- JSON.stringify(productsList) %>');
+
+    function addToOrder() {
+
+      const productIdInput = document.querySelector(
+        'input[name="product-id"]'
+      );
+      const quantityInput = document.querySelector('input[name="quantity"]');
+      const tableBody = document.querySelector("tbody");
+
+      const productId = productIdInput.value;
+      const quantity = parseInt(quantityInput.value);
+
+      // Check if quantity is a valid number
+      if (isNaN(quantity) || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+
+      // Find the product in the productsList based on Product_id
+      const product = productsList.find((item) => item.Product_id === productId);
+
+      if (!product) {
+        alert("Product not found in the list.");
+        return;
+      }
+
+      // Create a new row with the data from the inputs and the product list
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${productId}</td>
+        <td>${product.Name}</td>
+        <td>${quantity}</td>
+        <td>${product.Sell_price}</td>
+        <td>${quantity * product.Sell_price}</td>
+      `;
+
+      // Append the new row to the table
+      tableBody.appendChild(newRow);
+
+      // Clear the input fields after adding to the table
+      productIdInput.value = "";
+      quantityInput.value = "";
+    }
+    function removeFromOrder() {
+        const productIdInput = document.querySelector(
+          'input[name="product-id"]'
+        );
+        const quantityInput = document.querySelector('input[name="quantity"]');
+        const tableBody = document.querySelector("tbody");
+
+        const productId = productIdInput.value;
+        const quantity = parseInt(quantityInput.value);
+
+        // Check if quantity is a valid number
+        if (isNaN(quantity) || quantity <= 0) {
+          alert("Please enter a valid quantity.");
+          return;
+        }
+
+        // Find the row with the matching product ID
+        const rows = tableBody.querySelectorAll("tr");
+        for (const row of rows) {
+          const cells = row.querySelectorAll("td");
+          if (cells[0].textContent === productId) {
+            // Update the quantity in the table row
+            const currentQuantity = parseInt(cells[2].textContent);
+            const newQuantity = currentQuantity - quantity;
+
+            if (newQuantity > 0) {
+              cells[2].textContent = newQuantity;
+            } else {
+              // Remove the whole row if the new quantity is zero or negative
+              row.remove();
+            }
+            break;
+          }
+        }
+
+        // Clear the input fields after updating the table
+        productIdInput.value = "";
+        quantityInput.value = "";
+      }
+      
+    function placeOrder() {
+      // Collect all the order data from the table
+      const tableRows = document.querySelectorAll("tbody tr");
+      const orderData = [];
+
+      tableRows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        const productId = cells[0].textContent;
+        const quantity = parseInt(cells[2].textContent);
+        orderData.push({ Product_id: productId, Quantity: quantity });
+      });
+
+      // Check if there are any products in the order
+      if (orderData.length === 0) {
+        alert("Please add products to the order.");
+        return;
+      }
+
+      // Prepare the data to be sent to the server (Replace this with your desired data format)
+      const orderDataToSend = JSON.stringify(orderData);
+      console.log(JSON.stringify(orderData)); // Log the orderDataToSend
+
+
+      // Example: Sending the order data to the "placeorder" route using jQuery AJAX
+      $.ajax({
+        type: "POST", // Change the request type as per your server route
+        url: "/placeorder", // Replace this with your actual route URL
+        data: orderDataToSend,
+        contentType: "application/json",
+        success: function (response) {
+          // Handle the server's response (if needed)
+          console.log("Order placed successfully!", response);
+          // Optionally, you can show a success message or redirect to a new page
+        },
+        error: function (error) {
+          // Handle errors (if any)
+          console.error("Error placing the order:", error);
+          // Optionally, you can show an error message to the user
+        },
+      });
+    }
+
+    // ... (Your existing code for removeFromOrder() and other scripts)
+  </script>
+</body>
+</html>

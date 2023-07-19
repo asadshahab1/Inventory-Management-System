@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Stock</title>
+    <link rel="stylesheet" href="css/main1.css">
+</head>
+
+<body>
+    
+    <button id="dashboard-toggle"></button>
+        <div id="dashboard">
+            <img src="images/ahua-logo.png" id="TS" alt="">
+            <button id="dashbut1" onclick="window.location.href='/stock_manager';">VIEW STOCK</button>
+            <button onclick="window.location.href='/add-stock';">ADD STOCK</button>
+            <button onclick="window.location.href='/remove-stock';">REMOVE STOCK</button>
+            <button id="logout-button" onclick="window.location.href='/'">LOGOUT</button>
+        </div>
+
+        <script>
+            const openButton = document.getElementById('dashboard-toggle');
+            const dashboard = document.getElementById('dashboard');
+            var body = document.body
+    
+    openButton.addEventListener('click', () => {
+      dashboard.style.left = '0'; // Slide the dashboard in from the left
+    });
+    
+    body.addEventListener('click', (event) => {
+      if (event.target === dashboard) {
+        dashboard.style.left = '-500px'; // Slide the dashboard back out
+    }
+    });
+    
+        </script>
+
+    <h1 class="heading">VIEW STOCK:</h1>
+    
+    <div class="butdiv">
+
+        <button class="but1" onclick="window.location.href='/Karachi';">
+            <h1>KARACHI</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quia eos doloribus cumque, tempora quam iusto? Quis voluptatem possimus cum.</p>
+        </button>
+
+        <button class="but2" onclick="window.location.href='/Lahore';">
+            <h1>LAHORE</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora ipsam quod et ipsum non sint accusamus vel velit! Saepe, sequi?</p>
+        </button>
+
+        <button class="but3" onclick="window.location.href='/Islamabad';">
+            <h1>ISLAMABAD</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, consequuntur iure! Distinctio velit eum sit consectetur labore dignissimos illo totam.</p>
+        </button>
+
+    </div>
+
+</body>
+
+</html>
